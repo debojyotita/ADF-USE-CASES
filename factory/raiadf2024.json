@@ -1,0 +1,9 @@
+{
+	"name": "raiadf2024",
+	"location": "northeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "13edccc1-78f4-47f2-bd45-37d61850d852",
+		"tenantId": "f009f285-5242-433a-9365-daa1edf145c3"
+	}
+}

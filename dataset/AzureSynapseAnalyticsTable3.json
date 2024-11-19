@@ -1,0 +1,17 @@
+{
+	"name": "AzureSynapseAnalyticsTable3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSynapseAnalytics_dedicatedpool",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "SalesLT",
+			"table": "FactSales_MappingDataFlow"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
