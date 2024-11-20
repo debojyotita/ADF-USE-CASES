@@ -62,12 +62,14 @@
 					},
 					"sink": {
 						"type": "SqlDWSink",
+						"preCopyScript": "DELETE FROM DEDDICATEDACTIVITYLOGTABLE_PERSISTTANTTABLE_DATAPIPELINE",
 						"allowPolyBase": true,
 						"polyBaseSettings": {
 							"rejectValue": 0,
 							"rejectType": "value",
 							"useTypeDefault": true
-						}
+						},
+						"disableMetricsCollection": false
 					},
 					"enableStaging": false
 				},
