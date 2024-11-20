@@ -26,6 +26,9 @@
 		"AzureSqlDatabase1_properties_typeProperties_userName": {
 			"value": "rai"
 		},
+		"DataLake Trigger_properties_typeProperties_scope": {
+			"value": "/subscriptions/2aa59c76-ab15-4f28-ba39-ffc0aa42d2cd/resourceGroups/aks-demo1/providers/Microsoft.Storage/storageAccounts/strgdatalake2024"
+		},
 		"containerUri": {
 			"value": ""
 		},

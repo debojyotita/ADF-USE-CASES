@@ -35,6 +35,10 @@
 			"type": "string",
 			"defaultValue": "rai"
 		},
+		"DataLake Trigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/2aa59c76-ab15-4f28-ba39-ffc0aa42d2cd/resourceGroups/aks-demo1/providers/Microsoft.Storage/storageAccounts/strgdatalake2024"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -86,6 +90,29 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "raiadf2024_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"DataLake Trigger_properties_typeProperties_scope": {
+						"value": "[parameters('DataLake Trigger_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'raiadf2024_ArmTemplate_0')]"
+			]
 		}
 	]
 }
