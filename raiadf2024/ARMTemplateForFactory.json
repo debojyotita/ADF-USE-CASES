@@ -3109,6 +3109,36 @@
 								"type": "Expression"
 							}
 						}
+					},
+					{
+						"name": "Set variable2",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Execute SP",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "pipelineReturnValue",
+							"value": [
+								{
+									"key": "IsStoredProcFailedRunning",
+									"value": {
+										"type": "Boolean",
+										"content": true
+									}
+								}
+							],
+							"setSystemVariable": true
+						}
 					}
 				],
 				"policy": {
