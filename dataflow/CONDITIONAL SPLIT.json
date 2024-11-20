@@ -14,6 +14,10 @@
 			],
 			"sinks": [
 				{
+					"dataset": {
+						"referenceName": "ACTIVITYLOGTABLEDATASETS",
+						"type": "DatasetReference"
+					},
 					"name": "ActivityLogTable"
 				}
 			],
@@ -41,10 +45,31 @@
 				"     ignoreNoFilesFound: false) ~> ACTIVITYLOGCSV",
 				"ACTIVITYLOGCSV split(equals(Resourcegroup,'app-grp'),",
 				"     disjoint: false) ~> splitonresourcegroup@(appgrpstream, otherstream)",
-				"splitonresourcegroup@otherstream sink(allowSchemaDrift: true,",
+				"splitonresourcegroup@appgrpstream sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          Correlationid as string,",
+				"          Operationname as string,",
+				"          Status as string,",
+				"          Eventcategory as string,",
+				"          Level as string,",
+				"          Time as timestamp,",
+				"          Subscription as string,",
+				"          Eventinitiatedby as string,",
+				"          Resourcetype as string,",
+				"          Resourcegroup as string,",
+				"          Resource as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: true,",
+				"     allowCopyCommand: true,",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> ActivityLogTable"
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> ActivityLogTable"
 			]
 		}
 	}
