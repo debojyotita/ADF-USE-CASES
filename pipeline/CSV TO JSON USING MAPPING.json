@@ -54,7 +54,7 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": false,
-							"wildcardFolderPath": "csvtojsondata.json",
+							"wildcardFileName": "*.json",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -80,6 +80,16 @@
 						},
 						"path": "staging",
 						"enableCompression": true
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$"
+								}
+							}
+						]
 					}
 				},
 				"inputs": [
