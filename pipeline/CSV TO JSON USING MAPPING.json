@@ -78,7 +78,8 @@
 							"referenceName": "AzureDataLakeStorage",
 							"type": "LinkedServiceReference"
 						},
-						"path": "staging"
+						"path": "staging",
+						"enableCompression": true
 					}
 				},
 				"inputs": [
