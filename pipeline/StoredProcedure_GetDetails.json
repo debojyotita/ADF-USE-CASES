@@ -27,6 +27,44 @@
 					"referenceName": "AzureSynapseAnalytics_dedicatedpool",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "Look up",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Stored procedure",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlDWSource",
+						"sqlReaderStoredProcedureName": "[dbo].[GetDetails]",
+						"storedProcedureParameters": {
+							"resourcegrp": {
+								"type": "String",
+								"value": "a"
+							}
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ACTIVITYLOGTABLEDATASETS",
+						"type": "DatasetReference"
+					}
+				}
 			}
 		],
 		"annotations": []
