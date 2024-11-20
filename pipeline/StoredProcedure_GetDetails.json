@@ -64,7 +64,8 @@
 					"dataset": {
 						"referenceName": "ACTIVITYLOGTABLEDATASETS",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
