@@ -1,0 +1,34 @@
+{
+	"name": "AzureSynapseAnalyticsTable6",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSynapseAnalytics_dedicatedpool",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "CUSTOMERID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CUSTOMERNAME",
+				"type": "varchar"
+			},
+			{
+				"name": "ISREGISTERTED",
+				"type": "bit"
+			},
+			{
+				"name": "COURSE",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "COURSES"
+		}
+	}
+}

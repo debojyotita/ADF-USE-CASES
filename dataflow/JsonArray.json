@@ -12,7 +12,15 @@
 					"name": "JsonArray"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSynapseAnalyticsTable6",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "flattenjsonarray"
@@ -37,7 +45,31 @@
 				"          courses",
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
-				"     skipDuplicateMapOutputs: false) ~> flattenjsonarray"
+				"     skipDuplicateMapOutputs: false) ~> flattenjsonarray",
+				"flattenjsonarray sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          CUSTOMERID as integer,",
+				"          CUSTOMERNAME as string,",
+				"          ISREGISTERTED as boolean,",
+				"          COURSE as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: true,",
+				"     allowCopyCommand: true,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          CUSTOMERID = customerid,",
+				"          CUSTOMERNAME = customername,",
+				"          ISREGISTERTED = registered,",
+				"          COURSE = courses",
+				"     )) ~> sink1"
 			]
 		}
 	}
