@@ -409,7 +409,7 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "DEDDICATEDACTIVITYLOGTABLE_PERSISTTANTTABLE"
+					"table": "DEDDICATEDACTIVITYLOGTABLE_PERSISTTANTTABLE_DATAPIPELINE"
 				}
 			},
 			"dependsOn": [
