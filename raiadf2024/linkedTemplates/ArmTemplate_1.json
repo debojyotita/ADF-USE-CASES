@@ -1028,7 +1028,7 @@
 					],
 					"transformations": [
 						{
-							"name": "flattenjsonarray"
+							"name": "flatten1"
 						}
 					],
 					"scriptLines": [
@@ -1042,16 +1042,16 @@
 						"     validateSchema: false,",
 						"     ignoreNoFilesFound: false,",
 						"     documentForm: 'documentPerLine') ~> JsonArray",
-						"JsonArray foldDown(unroll(),",
+						"JsonArray foldDown(unroll(courses, courses),",
 						"     mapColumn(",
 						"          customerid,",
 						"          customername,",
 						"          registered,",
 						"          courses",
 						"     ),",
-						"     skipDuplicateMapInputs: false,",
-						"     skipDuplicateMapOutputs: false) ~> flattenjsonarray",
-						"flattenjsonarray sink(allowSchemaDrift: false,",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> flatten1",
+						"flatten1 sink(allowSchemaDrift: false,",
 						"     validateSchema: false,",
 						"     input(",
 						"          CUSTOMERID as integer,",
