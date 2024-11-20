@@ -18,7 +18,7 @@
 						"referenceName": "AzureSynapseAnalyticsTable6",
 						"type": "DatasetReference"
 					},
-					"name": "sink1"
+					"name": "sinkcourse"
 				}
 			],
 			"transformations": [
@@ -46,7 +46,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flattenjsonarray",
-				"flattenjsonarray sink(allowSchemaDrift: true,",
+				"flattenjsonarray sink(allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     input(",
 				"          CUSTOMERID as integer,",
@@ -69,7 +69,7 @@
 				"          CUSTOMERNAME = customername,",
 				"          ISREGISTERTED = registered,",
 				"          COURSE = courses",
-				"     )) ~> sink1"
+				"     )) ~> sinkcourse"
 			]
 		}
 	}
