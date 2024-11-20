@@ -80,16 +80,6 @@
 						},
 						"path": "staging",
 						"enableCompression": true
-					},
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"path": "$"
-								}
-							}
-						]
 					}
 				},
 				"inputs": [
