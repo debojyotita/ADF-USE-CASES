@@ -13,7 +13,11 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "flattenjsonarray"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          customerid as integer,",
@@ -24,7 +28,16 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     documentForm: 'documentPerLine') ~> JsonArray"
+				"     documentForm: 'documentPerLine') ~> JsonArray",
+				"JsonArray foldDown(unroll(),",
+				"     mapColumn(",
+				"          customerid,",
+				"          customername,",
+				"          registered,",
+				"          courses",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flattenjsonarray"
 			]
 		}
 	}
