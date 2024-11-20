@@ -35,7 +35,6 @@
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
 					"blobPathBeginsWith": "/datasets/blobs/",
-					"blobPathEndsWith": ".csv",
 					"ignoreEmptyBlobs": true,
 					"scope": "[parameters('DataLake Trigger_properties_typeProperties_scope')]",
 					"events": [
