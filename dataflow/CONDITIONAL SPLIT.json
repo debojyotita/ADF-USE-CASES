@@ -5,14 +5,38 @@
 		"typeProperties": {
 			"sources": [
 				{
+					"dataset": {
+						"referenceName": "ActivityLogDataSets",
+						"type": "DatasetReference"
+					},
 					"name": "ACTIVITYLOGCSV"
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "splitonresourcegroup"
+				}
+			],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
-				"     validateSchema: false) ~> ACTIVITYLOGCSV"
+				"source(output(",
+				"          Correlationid as string,",
+				"          Operationname as string,",
+				"          Status as string,",
+				"          Eventcategory as string,",
+				"          Level as string,",
+				"          Time as string,",
+				"          Subscription as string,",
+				"          Eventinitiatedby as string,",
+				"          Resourcetype as string,",
+				"          Resourcegroup as string,",
+				"          Resource as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> ACTIVITYLOGCSV",
+				"ACTIVITYLOGCSV split(ERROR_FUNCTION(''),",
+				"     disjoint: false) ~> splitonresourcegroup@(appgrpstream, otherstream)"
 			]
 		}
 	}
