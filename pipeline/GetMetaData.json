@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Get Metadata ",
+				"name": "Get Metadata For Blob",
 				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
@@ -13,7 +13,24 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ActivityLogDataSets",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"columnCount",
+						"itemName"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
 			}
 		],
 		"annotations": []
