@@ -41,7 +41,10 @@
 				"     documentForm: 'arrayOfDocuments') ~> JsonArray",
 				"JsonArray foldDown(unroll(courses, courses),",
 				"     mapColumn(",
-				"          {} = customerid",
+				"          CustomerId = customerid,",
+				"          CustomerName = customername,",
+				"          IsRegistered = registered,",
+				"          course = courses",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> flatten1",
@@ -67,9 +70,9 @@
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
 				"          CUSTOMERID = customerid,",
-				"          CUSTOMERNAME = customername,",
-				"          ISREGISTERTED = registered,",
-				"          COURSE = courses",
+				"          CUSTOMERNAME = CustomerName,",
+				"          ISREGISTERTED = IsRegistered,",
+				"          COURSE = course",
 				"     )) ~> sinkcourse"
 			]
 		}
