@@ -16,14 +16,11 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "ActivityLogDataSets",
+						"referenceName": "ActivityLogConatiner",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
-						"columnCount",
-						"itemName",
-						"size",
-						"structure"
+						"itemName"
 					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
