@@ -35,7 +35,8 @@
 					{
 						"activity": "Stored procedure",
 						"dependencyConditions": [
-							"Succeeded"
+							"Succeeded",
+							"Failed"
 						]
 					}
 				],
