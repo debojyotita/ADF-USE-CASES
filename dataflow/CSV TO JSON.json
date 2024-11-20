@@ -45,7 +45,7 @@
 				"     ignoreNoFilesFound: false) ~> csv",
 				"csv sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     partitionFileNames:[''],",
+				"     partitionFileNames:['csvtojsondata'],",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
