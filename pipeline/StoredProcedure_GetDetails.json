@@ -1,5 +1,5 @@
 {
-	"name": "StoredProcedure",
+	"name": "StoredProcedure_GetDetails",
 	"properties": {
 		"activities": [
 			{
@@ -15,7 +15,13 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[GetDetails]"
+					"storedProcedureName": "[dbo].[GetDetails]",
+					"storedProcedureParameters": {
+						"resourcegrp": {
+							"value": "app-grp",
+							"type": "String"
+						}
+					}
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureSynapseAnalytics_dedicatedpool",
