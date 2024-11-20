@@ -1,0 +1,25 @@
+{
+	"name": "DataLake Trigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "FROM CSV TO PARQUET TO SQL DATA POOL",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/datasets/blobs/",
+			"blobPathEndsWith": ".csv",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/2aa59c76-ab15-4f28-ba39-ffc0aa42d2cd/resourceGroups/aks-demo1/providers/Microsoft.Storage/storageAccounts/strgdatalake2024",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
