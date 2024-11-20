@@ -2959,7 +2959,6 @@
 											"storeSettings": {
 												"type": "AzureBlobFSReadSettings",
 												"recursive": true,
-												"wildcardFileName": "filename",
 												"enablePartitionDiscovery": false
 											},
 											"formatSettings": {
@@ -3262,6 +3261,10 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().filename",
+							"type": "Expression"
+						},
 						"fileSystem": "datasets"
 					},
 					"columnDelimiter": ",",
