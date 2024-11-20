@@ -77,7 +77,8 @@
 				"          CUSTOMERNAME = CustomerName,",
 				"          ISREGISTERTED = IsRegistered,",
 				"          COURSE = course,",
-				"          Mobile",
+				"          Mobile,",
+				"          City",
 				"     )) ~> sinkcourse"
 			]
 		}
