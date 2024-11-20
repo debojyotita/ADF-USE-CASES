@@ -87,7 +87,7 @@
 				"typeProperties": {
 					"variableName": "firstoperationname",
 					"value": {
-						"value": "@activity('Execute SP').output.value",
+						"value": "@activity('Execute SP').output.value[0].operationname",
 						"type": "Expression"
 					}
 				}
@@ -95,6 +95,9 @@
 		],
 		"variables": {
 			"firstoperationname": {
+				"type": "String"
+			},
+			"firststatus": {
 				"type": "String"
 			}
 		},
