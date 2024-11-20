@@ -1,0 +1,19 @@
+{
+	"name": "JsonArray",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "JsonArray"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> JsonArray"
+			]
+		}
+	}
+}
