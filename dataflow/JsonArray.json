@@ -71,10 +71,11 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
-				"          CUSTOMERID = customerid,",
+				"          CUSTOMERID = CustomerId,",
 				"          CUSTOMERNAME = CustomerName,",
 				"          ISREGISTERTED = IsRegistered,",
-				"          COURSE = course",
+				"          COURSE = course,",
+				"          Mobile",
 				"     )) ~> sinkcourse"
 			]
 		}
