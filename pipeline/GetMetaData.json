@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Get Metadata For Blob",
+				"name": "Get Metadata For Blob Conatiner",
 				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
