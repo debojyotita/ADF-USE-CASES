@@ -284,6 +284,76 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ActivityLogConatiner')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "datasets"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Correlationid",
+						"type": "String"
+					},
+					{
+						"name": "Operationname",
+						"type": "String"
+					},
+					{
+						"name": "Status",
+						"type": "String"
+					},
+					{
+						"name": "Eventcategory",
+						"type": "String"
+					},
+					{
+						"name": "Level",
+						"type": "String"
+					},
+					{
+						"name": "Time",
+						"type": "String"
+					},
+					{
+						"name": "Subscription",
+						"type": "String"
+					},
+					{
+						"name": "Eventinitiatedby",
+						"type": "String"
+					},
+					{
+						"name": "Resourcetype",
+						"type": "String"
+					},
+					{
+						"name": "Resourcegroup",
+						"type": "String"
+					},
+					{
+						"name": "Resource",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/COPY FROM AZURE SQL TO AZURE SYNAPSE')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -1461,7 +1531,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Get Metadata For Blob",
+						"name": "Get Metadata For Blob Conatiner",
 						"type": "GetMetadata",
 						"dependsOn": [],
 						"policy": {
@@ -1474,15 +1544,12 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataset": {
-								"referenceName": "ActivityLogDataSets",
+								"referenceName": "ActivityLogConatiner",
 								"type": "DatasetReference",
 								"parameters": {}
 							},
 							"fieldList": [
-								"columnCount",
-								"itemName",
-								"size",
-								"structure"
+								"itemName"
 							],
 							"storeSettings": {
 								"type": "AzureBlobFSReadSettings",
@@ -1500,7 +1567,7 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ActivityLogDataSets')]"
+				"[concat(variables('factoryId'), '/datasets/ActivityLogConatiner')]"
 			]
 		},
 		{
