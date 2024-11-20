@@ -1073,7 +1073,6 @@
 						"     staged: true,",
 						"     allowCopyCommand: true,",
 						"     preSQLs:['DELETE FROM COURSES'],",
-						"     postSQLs:['SELECT COUNT(*) FROM COURSES'],",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true,",
 						"     errorHandlingOption: 'stopOnFirstError',",
