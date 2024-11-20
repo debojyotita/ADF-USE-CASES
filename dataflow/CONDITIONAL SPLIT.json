@@ -33,7 +33,7 @@
 				"          Status as string,",
 				"          Eventcategory as string,",
 				"          Level as string,",
-				"          Time as string,",
+				"          Time as timestamp,",
 				"          Subscription as string,",
 				"          Eventinitiatedby as string,",
 				"          Resourcetype as string,",
@@ -69,7 +69,20 @@
 				"     allowCopyCommand: true,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> ActivityLogTable"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Correlationid,",
+				"          Operationname,",
+				"          Status,",
+				"          Eventcategory,",
+				"          Level,",
+				"          Time,",
+				"          Subscription,",
+				"          Eventinitiatedby,",
+				"          Resourcetype,",
+				"          Resourcegroup,",
+				"          Resource",
+				"     )) ~> ActivityLogTable"
 			]
 		}
 	}
