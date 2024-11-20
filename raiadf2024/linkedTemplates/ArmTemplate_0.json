@@ -964,6 +964,102 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "ActivityLog-01.csv",
+						"fileSystem": "datasets"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Correlationid",
+						"type": "String"
+					},
+					{
+						"name": "Operationname",
+						"type": "String"
+					},
+					{
+						"name": "Status",
+						"type": "String"
+					},
+					{
+						"name": "Eventcategory",
+						"type": "String"
+					},
+					{
+						"name": "Level",
+						"type": "String"
+					},
+					{
+						"name": "Time",
+						"type": "String"
+					},
+					{
+						"name": "Subscription",
+						"type": "String"
+					},
+					{
+						"name": "Eventinitiatedby",
+						"type": "String"
+					},
+					{
+						"name": "Resourcetype",
+						"type": "String"
+					},
+					{
+						"name": "Resourcegroup",
+						"type": "String"
+					},
+					{
+						"name": "Resource",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Json1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "json"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/COPY FROM AZURE SQL TO AZURE SYNAPSE')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -1562,420 +1658,6 @@
 				"[concat(variables('factoryId'), '/datasets/CREATEPARQUET')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSynapseAnalyticsTable1')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AZURE SQL TO DEDICATED SQL POOL FACT TABLE')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "SALESORDERHEADERDATASETS",
-								"type": "DatasetReference"
-							},
-							"name": "SALESORDERHEADER",
-							"description": "Import data from AzureSql"
-						},
-						{
-							"dataset": {
-								"referenceName": "SALESORDERDETAILDATASETS",
-								"type": "DatasetReference"
-							},
-							"name": "SALESORDERDETAILDATASETS"
-						},
-						{
-							"dataset": {
-								"referenceName": "AzureSqlTable2",
-								"type": "DatasetReference"
-							},
-							"name": "DIMCUSTOMER"
-						},
-						{
-							"dataset": {
-								"referenceName": "AzureSqlTable3",
-								"type": "DatasetReference"
-							},
-							"name": "PRODUCTSTREAM"
-						},
-						{
-							"dataset": {
-								"referenceName": "AzureSqlTable4",
-								"type": "DatasetReference"
-							},
-							"name": "PRODUCTCATEGORY"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "AzureSynapseAnalyticsTable3",
-								"type": "DatasetReference"
-							},
-							"name": "sink1",
-							"description": "Export data to SalesLT.FactSales_MappingDataFlow"
-						},
-						{
-							"dataset": {
-								"referenceName": "AzureSynapseAnalyticsTable4",
-								"type": "DatasetReference"
-							},
-							"name": "DIMCUSTOMERSINK"
-						},
-						{
-							"dataset": {
-								"referenceName": "AzureSynapseAnalyticsTable5",
-								"type": "DatasetReference"
-							},
-							"name": "sink2"
-						}
-					],
-					"transformations": [
-						{
-							"name": "join1"
-						},
-						{
-							"name": "select1"
-						},
-						{
-							"name": "SELECT2"
-						},
-						{
-							"name": "INNERJOINDIMPRODUCT"
-						},
-						{
-							"name": "select3"
-						},
-						{
-							"name": "filter1"
-						},
-						{
-							"name": "derivedColumn1"
-						}
-					],
-					"scriptLines": [
-						"source(output(",
-						"          SalesOrderID as integer,",
-						"          RevisionNumber as integer,",
-						"          OrderDate as timestamp,",
-						"          DueDate as timestamp,",
-						"          ShipDate as timestamp,",
-						"          Status as integer,",
-						"          OnlineOrderFlag as boolean,",
-						"          SalesOrderNumber as string,",
-						"          PurchaseOrderNumber as string,",
-						"          AccountNumber as string,",
-						"          CustomerID as integer,",
-						"          ShipToAddressID as integer,",
-						"          BillToAddressID as integer,",
-						"          ShipMethod as string,",
-						"          CreditCardApprovalCode as string,",
-						"          SubTotal as decimal(19,4),",
-						"          TaxAmt as decimal(19,4),",
-						"          Freight as decimal(19,4),",
-						"          TotalDue as decimal(19,4),",
-						"          Comment as string,",
-						"          rowguid as string,",
-						"          ModifiedDate as timestamp",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     isolationLevel: 'READ_UNCOMMITTED',",
-						"     format: 'table') ~> SALESORDERHEADER",
-						"source(output(",
-						"          SalesOrderID as integer,",
-						"          RevisionNumber as integer,",
-						"          OrderDate as timestamp,",
-						"          DueDate as timestamp,",
-						"          ShipDate as timestamp,",
-						"          Status as integer,",
-						"          OnlineOrderFlag as boolean,",
-						"          SalesOrderNumber as string,",
-						"          PurchaseOrderNumber as string,",
-						"          AccountNumber as string,",
-						"          CustomerID as integer,",
-						"          ShipToAddressID as integer,",
-						"          BillToAddressID as integer,",
-						"          ShipMethod as string,",
-						"          CreditCardApprovalCode as string,",
-						"          SubTotal as decimal(19,4),",
-						"          TaxAmt as decimal(19,4),",
-						"          Freight as decimal(19,4),",
-						"          TotalDue as decimal(19,4),",
-						"          Comment as string,",
-						"          rowguid as string,",
-						"          ModifiedDate as timestamp",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     isolationLevel: 'READ_UNCOMMITTED',",
-						"     format: 'table') ~> SALESORDERDETAILDATASETS",
-						"source(output(",
-						"          CustomerID as integer,",
-						"          NameStyle as boolean,",
-						"          Title as string,",
-						"          FirstName as string,",
-						"          MiddleName as string,",
-						"          LastName as string,",
-						"          Suffix as string,",
-						"          CompanyName as string,",
-						"          SalesPerson as string,",
-						"          EmailAddress as string,",
-						"          Phone as string,",
-						"          PasswordHash as string,",
-						"          PasswordSalt as string,",
-						"          rowguid as string,",
-						"          ModifiedDate as timestamp",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     isolationLevel: 'READ_UNCOMMITTED',",
-						"     format: 'table') ~> DIMCUSTOMER",
-						"source(output(",
-						"          ProductID as integer,",
-						"          Name as string,",
-						"          ProductNumber as string,",
-						"          Color as string,",
-						"          StandardCost as decimal(19,4),",
-						"          ListPrice as decimal(19,4),",
-						"          Size as string,",
-						"          Weight as decimal(8,2),",
-						"          ProductCategoryID as integer,",
-						"          ProductModelID as integer,",
-						"          SellStartDate as timestamp,",
-						"          SellEndDate as timestamp,",
-						"          DiscontinuedDate as timestamp,",
-						"          ThumbNailPhoto as binary,",
-						"          ThumbnailPhotoFileName as string,",
-						"          rowguid as string,",
-						"          ModifiedDate as timestamp",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     isolationLevel: 'READ_UNCOMMITTED',",
-						"     format: 'table') ~> PRODUCTSTREAM",
-						"source(output(",
-						"          ProductCategoryID as integer,",
-						"          ParentProductCategoryID as integer,",
-						"          Name as string,",
-						"          rowguid as string,",
-						"          ModifiedDate as timestamp",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     isolationLevel: 'READ_UNCOMMITTED',",
-						"     format: 'table') ~> PRODUCTCATEGORY",
-						"SALESORDERHEADER, SALESORDERDETAILDATASETS join(SALESORDERHEADER@SalesOrderID == SALESORDERDETAILDATASETS@SalesOrderID,",
-						"     joinType:'inner',",
-						"     matchType:'exact',",
-						"     ignoreSpaces: false,",
-						"     broadcast: 'auto')~> join1",
-						"join1 select(mapColumn(",
-						"          SalesOrderID = SALESORDERHEADER@SalesOrderID,",
-						"          OrderDate = SALESORDERHEADER@OrderDate,",
-						"          CustomerID = SALESORDERHEADER@CustomerID,",
-						"          Freight = SALESORDERHEADER@Freight,",
-						"          Comment = SALESORDERHEADER@Comment,",
-						"          rowguid = SALESORDERHEADER@rowguid,",
-						"          ModifiedDate = SALESORDERHEADER@ModifiedDate,",
-						"          RevisionNumber = SALESORDERDETAILDATASETS@RevisionNumber,",
-						"          OrderDate = SALESORDERDETAILDATASETS@OrderDate,",
-						"          DueDate = SALESORDERDETAILDATASETS@DueDate,",
-						"          ShipDate = SALESORDERDETAILDATASETS@ShipDate,",
-						"          Status = SALESORDERDETAILDATASETS@Status,",
-						"          OnlineOrderFlag = SALESORDERDETAILDATASETS@OnlineOrderFlag,",
-						"          SalesOrderNumber = SALESORDERDETAILDATASETS@SalesOrderNumber,",
-						"          PurchaseOrderNumber = SALESORDERDETAILDATASETS@PurchaseOrderNumber,",
-						"          AccountNumber = SALESORDERDETAILDATASETS@AccountNumber,",
-						"          CustomerID = SALESORDERDETAILDATASETS@CustomerID,",
-						"          ShipToAddressID = SALESORDERDETAILDATASETS@ShipToAddressID,",
-						"          BillToAddressID = SALESORDERDETAILDATASETS@BillToAddressID,",
-						"          ShipMethod = SALESORDERDETAILDATASETS@ShipMethod,",
-						"          CreditCardApprovalCode = SALESORDERDETAILDATASETS@CreditCardApprovalCode,",
-						"          SubTotal = SALESORDERDETAILDATASETS@SubTotal,",
-						"          TaxAmt = SALESORDERDETAILDATASETS@TaxAmt,",
-						"          Freight = SALESORDERDETAILDATASETS@Freight,",
-						"          TotalDue = SALESORDERDETAILDATASETS@TotalDue,",
-						"          Comment = SALESORDERDETAILDATASETS@Comment,",
-						"          rowguid = SALESORDERDETAILDATASETS@rowguid,",
-						"          ModifiedDate = SALESORDERDETAILDATASETS@ModifiedDate",
-						"     ),",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> select1",
-						"DIMCUSTOMER select(mapColumn(",
-						"          CustomerID,",
-						"          CompanyName",
-						"     ),",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> SELECT2",
-						"PRODUCTSTREAM, PRODUCTCATEGORY join(PRODUCTSTREAM@ProductCategoryID == PRODUCTCATEGORY@ProductCategoryID,",
-						"     joinType:'inner',",
-						"     matchType:'exact',",
-						"     ignoreSpaces: false,",
-						"     broadcast: 'auto')~> INNERJOINDIMPRODUCT",
-						"INNERJOINDIMPRODUCT select(mapColumn(",
-						"          ProductID,",
-						"          ProductNumber,",
-						"          Color,",
-						"          ProductCategoryID = PRODUCTSTREAM@ProductCategoryID,",
-						"          ProductCategoryName = PRODUCTCATEGORY@Name",
-						"     ),",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> select3",
-						"select3 filter(!isNull(Color)) ~> filter1",
-						"select1 derive(TotalDue = add(Freight,add(SubTotal,TaxAmt))) ~> derivedColumn1",
-						"derivedColumn1 sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     deletable:false,",
-						"     insertable:true,",
-						"     updateable:false,",
-						"     upsertable:false,",
-						"     format: 'table',",
-						"     staged: true,",
-						"     allowCopyCommand: true,",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true,",
-						"     errorHandlingOption: 'stopOnFirstError') ~> sink1",
-						"SELECT2 sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     input(",
-						"          CustomerSk as integer,",
-						"          CustomerID as integer,",
-						"          CompanyName as string",
-						"     ),",
-						"     deletable:false,",
-						"     insertable:true,",
-						"     updateable:false,",
-						"     upsertable:false,",
-						"     format: 'table',",
-						"     staged: true,",
-						"     allowCopyCommand: true,",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true,",
-						"     errorHandlingOption: 'stopOnFirstError') ~> DIMCUSTOMERSINK",
-						"filter1 sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     input(",
-						"          ProductSK as integer,",
-						"          ProductCategoryID as integer,",
-						"          Color as string,",
-						"          ProductID as integer,",
-						"          ProductNumber as string,",
-						"          ProductCategoryName as string",
-						"     ),",
-						"     deletable:false,",
-						"     insertable:true,",
-						"     updateable:false,",
-						"     upsertable:false,",
-						"     format: 'table',",
-						"     staged: true,",
-						"     allowCopyCommand: true,",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true,",
-						"     errorHandlingOption: 'stopOnFirstError') ~> sink2"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SALESORDERHEADERDATASETS')]",
-				"[concat(variables('factoryId'), '/datasets/SALESORDERDETAILDATASETS')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSqlTable2')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSqlTable3')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSqlTable4')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSynapseAnalyticsTable3')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSynapseAnalyticsTable4')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSynapseAnalyticsTable5')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DATAFLOWRUN')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "TEST DATA FLOW",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [
-							{
-								"activity": "Stored procedure",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "AZURE SQL TO DEDICATED SQL POOL FACT TABLE",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"SALESORDERHEADER": {},
-									"SALESORDERDETAILDATASETS": {},
-									"DIMCUSTOMER": {},
-									"PRODUCTSTREAM": {},
-									"PRODUCTCATEGORY": {},
-									"sink1": {},
-									"DIMCUSTOMERSINK": {},
-									"sink2": {}
-								}
-							},
-							"staging": {
-								"linkedService": {
-									"referenceName": "AzureDataLakeStorage",
-									"type": "LinkedServiceReference"
-								},
-								"folderPath": "staging"
-							},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "Stored procedure",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[CLEANUP]"
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureSynapseAnalytics_dedicatedpool",
-							"type": "LinkedServiceReference"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2024-11-19T19:39:44Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/AZURE SQL TO DEDICATED SQL POOL FACT TABLE')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureSynapseAnalytics_dedicatedpool')]"
 			]
 		}
 	]
