@@ -18,7 +18,11 @@
 						"referenceName": "Json1",
 						"type": "DatasetReference"
 					},
-					"name": "json"
+					"name": "json",
+					"rejectedDataLinkedService": {
+						"referenceName": "AzureDataLakeStorage",
+						"type": "LinkedServiceReference"
+					}
 				}
 			],
 			"transformations": [],
@@ -41,11 +45,14 @@
 				"     ignoreNoFilesFound: false) ~> csv",
 				"csv sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     partitionFileNames:[''],",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
+				"     outputAssertFailedRows: true,",
+				"     assertFailure_fileSystem: 'logdata',",
 				"     mapColumn(",
 				"          Correlationid,",
 				"          Operationname,",
@@ -58,7 +65,8 @@
 				"          Resourcetype,",
 				"          Resourcegroup,",
 				"          Resource",
-				"     )) ~> json"
+				"     ),",
+				"     partitionBy('hash', 1)) ~> json"
 			]
 		}
 	}
