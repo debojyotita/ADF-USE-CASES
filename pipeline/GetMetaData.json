@@ -37,8 +37,21 @@
 			{
 				"name": "ForEach",
 				"type": "ForEach",
-				"dependsOn": [],
-				"userProperties": []
+				"dependsOn": [
+					{
+						"activity": "Get Metadata For Blob Conatiner",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Get Metadata For Blob Conatiner').output.itemName",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"annotations": []
