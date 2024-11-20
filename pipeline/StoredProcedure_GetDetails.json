@@ -83,9 +83,21 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "firstoperationname",
+					"value": {
+						"value": "@activity('Execute SP').output.value",
+						"type": "Expression"
+					}
+				}
 			}
 		],
+		"variables": {
+			"firstoperationname": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
