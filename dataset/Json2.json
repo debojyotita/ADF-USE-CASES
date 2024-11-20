@@ -31,6 +31,17 @@
 					"items": {
 						"type": "string"
 					}
+				},
+				"details": {
+					"type": "object",
+					"properties": {
+						"mobile": {
+							"type": "string"
+						},
+						"city": {
+							"type": "string"
+						}
+					}
 				}
 			}
 		}
