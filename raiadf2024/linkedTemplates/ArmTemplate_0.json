@@ -628,6 +628,14 @@
 					{
 						"name": "COURSE",
 						"type": "varchar"
+					},
+					{
+						"name": "Mobile",
+						"type": "varchar"
+					},
+					{
+						"name": "City",
+						"type": "varchar"
 					}
 				],
 				"typeProperties": {
@@ -868,6 +876,17 @@
 							"type": "array",
 							"items": {
 								"type": "string"
+							}
+						},
+						"details": {
+							"type": "object",
+							"properties": {
+								"mobile": {
+									"type": "string"
+								},
+								"city": {
+									"type": "string"
+								}
 							}
 						}
 					}

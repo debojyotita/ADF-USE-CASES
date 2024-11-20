@@ -1476,6 +1476,14 @@
 					{
 						"name": "COURSE",
 						"type": "varchar"
+					},
+					{
+						"name": "Mobile",
+						"type": "varchar"
+					},
+					{
+						"name": "City",
+						"type": "varchar"
 					}
 				],
 				"typeProperties": {
@@ -1716,6 +1724,17 @@
 							"type": "array",
 							"items": {
 								"type": "string"
+							}
+						},
+						"details": {
+							"type": "object",
+							"properties": {
+								"mobile": {
+									"type": "string"
+								},
+								"city": {
+									"type": "string"
+								}
 							}
 						}
 					}
@@ -2512,18 +2531,22 @@
 						"          customerid as integer,",
 						"          customername as string,",
 						"          registered as boolean,",
-						"          courses as string[]",
+						"          courses as string[],",
+						"          details as (mobile as string, city as string)",
 						"     ),",
 						"     allowSchemaDrift: true,",
 						"     validateSchema: false,",
+						"     limit: 100,",
 						"     ignoreNoFilesFound: false,",
 						"     documentForm: 'arrayOfDocuments') ~> JsonArray",
 						"JsonArray foldDown(unroll(courses, courses),",
 						"     mapColumn(",
-						"          customerid,",
-						"          customername,",
-						"          registered,",
-						"          courses",
+						"          CustomerId = customerid,",
+						"          CustomerName = customername,",
+						"          IsRegistered = registered,",
+						"          course = courses,",
+						"          Mobile = details.mobile,",
+						"          City = details.city",
 						"     ),",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> flatten1",
@@ -2533,7 +2556,9 @@
 						"          CUSTOMERID as integer,",
 						"          CUSTOMERNAME as string,",
 						"          ISREGISTERTED as boolean,",
-						"          COURSE as string",
+						"          COURSE as string,",
+						"          Mobile as string,",
+						"          City as string",
 						"     ),",
 						"     deletable:false,",
 						"     insertable:true,",
@@ -2548,10 +2573,12 @@
 						"     skipDuplicateMapOutputs: true,",
 						"     errorHandlingOption: 'stopOnFirstError',",
 						"     mapColumn(",
-						"          CUSTOMERID = customerid,",
-						"          CUSTOMERNAME = customername,",
-						"          ISREGISTERTED = registered,",
-						"          COURSE = courses",
+						"          CUSTOMERID = CustomerId,",
+						"          CUSTOMERNAME = CustomerName,",
+						"          ISREGISTERTED = IsRegistered,",
+						"          COURSE = course,",
+						"          Mobile,",
+						"          City",
 						"     )) ~> sinkcourse"
 					]
 				}
