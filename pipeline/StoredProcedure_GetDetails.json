@@ -112,7 +112,11 @@
 					"variableName": "pipelineReturnValue",
 					"value": [
 						{
-							"key": ""
+							"key": "IsStoredProcFailedRunning",
+							"value": {
+								"type": "Boolean",
+								"content": true
+							}
 						}
 					],
 					"setSystemVariable": true
