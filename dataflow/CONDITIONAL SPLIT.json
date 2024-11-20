@@ -12,7 +12,11 @@
 					"name": "ACTIVITYLOGCSV"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "ActivityLogTable"
+				}
+			],
 			"transformations": [
 				{
 					"name": "splitonresourcegroup"
@@ -35,8 +39,12 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> ACTIVITYLOGCSV",
-				"ACTIVITYLOGCSV split(ERROR_FUNCTION(''),",
-				"     disjoint: false) ~> splitonresourcegroup@(appgrpstream, otherstream)"
+				"ACTIVITYLOGCSV split(equals(Resourcegroup,'app-grp'),",
+				"     disjoint: false) ~> splitonresourcegroup@(appgrpstream, otherstream)",
+				"splitonresourcegroup@otherstream sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> ActivityLogTable"
 			]
 		}
 	}
