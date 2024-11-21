@@ -1,0 +1,44 @@
+{
+	"name": "SponsorList",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "SponsorList.csv",
+				"fileSystem": "datasets"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "OrganisationName",
+				"type": "String"
+			},
+			{
+				"name": "Town/City",
+				"type": "String"
+			},
+			{
+				"name": "County",
+				"type": "String"
+			},
+			{
+				"name": "Type & Rating",
+				"type": "String"
+			},
+			{
+				"name": "Route",
+				"type": "String"
+			}
+		]
+	}
+}
