@@ -35,10 +35,6 @@
 			"type": "string",
 			"defaultValue": "rai"
 		},
-		"DataLake Trigger_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/2aa59c76-ab15-4f28-ba39-ffc0aa42d2cd/resourceGroups/aks-demo1/providers/Microsoft.Storage/storageAccounts/strgdatalake2024"
-		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -104,9 +100,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"DataLake Trigger_properties_typeProperties_scope": {
-						"value": "[parameters('DataLake Trigger_properties_typeProperties_scope')]"
 					}
 				}
 			},
