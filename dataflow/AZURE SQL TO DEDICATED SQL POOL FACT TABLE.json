@@ -83,9 +83,6 @@
 				},
 				{
 					"name": "filter1"
-				},
-				{
-					"name": "derivedColumn1"
 				}
 			],
 			"scriptLines": [
@@ -258,8 +255,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select3",
 				"select3 filter(!isNull(Color)) ~> filter1",
-				"select1 derive(TotalDue = add(Freight,add(SubTotal,TaxAmt))) ~> derivedColumn1",
-				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
